@@ -1,0 +1,62 @@
+[
+  {
+    "id": "user-default",
+    "username": "admin",
+    "password": "password123",
+    "full_name": "Admin User",
+    "email": "admin@example.com"
+  },
+  {
+    "id": "user-1769488858982",
+    "username": "sanalk",
+    "password": "Sanal@123",
+    "email": "sanalshijilkk51@gmail.com",
+    "full_name": "sanal",
+    "created_at": "2026-01-27T04:40:58.982Z"
+  },
+  {
+    "id": "user-1769504296291",
+    "username": "sriram",
+    "password": "sriramrr77",
+    "email": "nairsriram3839@gmail.com",
+    "full_name": "sriram",
+    "created_at": "2026-01-27T08:58:16.291Z"
+  },
+  {
+    "id": "user-1771335794815",
+    "username": "test",
+    "password": "test123",
+    "email": "sanalshijilkk59@gmail.com",
+    "full_name": "sanalh",
+    "created_at": "2026-02-17T13:43:14.815Z"
+  },
+  {
+    "id": "user-1772882533715",
+    "username": "test12",
+    "password": "test123",
+    "email": "sanalshijilkk57@gmail.com",
+    "full_name": "sanal",
+    "created_at": "2026-03-07T11:22:13.715Z",
+    "updated_at": "2026-03-11T12:23:30.247Z",
+    "avatar_url": "avatar.glb",
+    "avatar_model": "mpfb.glb"
+  },
+  {
+    "id": "user-1773106151101",
+    "username": "Gov",
+    "password": "Govind@2004",
+    "email": "govindvj2020@gmail.com",
+    "full_name": "Govind Vijay",
+    "created_at": "2026-03-10T01:29:11.102Z",
+    "avatar_url": "https://models.readyplayer.me/69b0ae265f0ce8d116080a0c.glb?morphTargets=ARKit,Oculus+Visemes,mouthOpen,mouthSmile,eyesClosed,eyesLookUp,eyesLookDown&textureSizeLimit=1024&textureFormat=png",
+    "updated_at": "2026-03-10T23:50:01.633Z"
+  },
+  {
+    "id": "user-1778588906825",
+    "username": "user",
+    "password": "Sriramrr77@",
+    "email": "sriramrnair77@gmail.com",
+    "full_name": "sriram",
+    "created_at": "2026-05-12T12:28:26.835Z"
+  }
+]

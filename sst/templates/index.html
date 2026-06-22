@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Speech API Speech to Text</title>
+</head>
+<body>
+  <h2>Web Speech API Speech to Text</h2>
+  <button id="startBtn">Start Listening</button>
+  <button id="stopBtn">Stop Listening</button>
+  <div id="status" style="margin: 10px 0; color: #666;"></div>
+  <p id="output"></p>
+
+<script>
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (SpeechRecognition) {
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    const output = document.getElementById("output");
+    const status = document.getElementById("status");
+
+    recognition.onstart = () => {
+      status.textContent = "🎤 Listening...";
+      output.textContent = "Listening... speak now";
+    };
+
+    recognition.onresult = (event) => {
+      let finalTranscript = "";
+      let interimTranscript = "";
+      
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript + " ";
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+      
+      if (finalTranscript) {
+        output.textContent = "You said: " + finalTranscript;
+      }
+      status.textContent = interimTranscript ? "Hearing: " + interimTranscript : "🎤 Listening...";
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+      
+      if (event.error === 'no-speech') {
+        status.textContent = "🎤 Listening... (no speech detected)";
+      } else if (event.error === 'audio-capture') {
+        status.textContent = "❌ Microphone error - check permissions";
+        output.textContent = "Microphone access denied. Please allow microphone access and refresh.";
+      } else if (event.error === 'not-allowed') {
+        status.textContent = "❌ Microphone access denied";
+        output.textContent = "Microphone permission denied. Please allow microphone access and refresh.";
+      } else {
+        status.textContent = "❌ Error: " + event.error;
+        output.textContent = "Error: " + event.error;
+      }
+    };
+
+    recognition.onend = () => {
+      status.textContent = "⏹️ Stopped";
+    };
+
+    // Check microphone permissions before starting
+    async function checkMicrophonePermission() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        stream.getTracks().forEach(track => track.stop());
+        return true;
+      } catch (error) {
+        console.error('Microphone permission error:', error);
+        if (error.name === 'NotAllowedError') {
+          status.textContent = "❌ Microphone permission denied";
+          output.textContent = "Please allow microphone access in your browser settings and refresh the page.";
+        } else if (error.name === 'NotFoundError') {
+          status.textContent = "❌ No microphone found";
+          output.textContent = "No microphone detected. Please connect a microphone.";
+        } else {
+          status.textContent = "❌ Microphone error";
+          output.textContent = "Microphone error: " + error.message;
+        }
+        return false;
+      }
+    }
+
+    document.getElementById("startBtn").addEventListener("click", async () => {
+      const hasPermission = await checkMicrophonePermission();
+      if (hasPermission) {
+        recognition.start();
+      }
+    });
+
+    document.getElementById("stopBtn").addEventListener("click", () => {
+      recognition.stop();
+    });
+
+  } else {
+    alert("Speech Recognition not supported in this browser. Please use Chrome, Edge, or Safari.");
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Avatar Job Discussion AI - Dashboard</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: "Fira Sans Condensed";
+            src: url("fonts/FiraSansCondensed-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: "Fira Sans Condensed";
+            src: url("fonts/FiraSansCondensed-Bold.ttf") format("truetype");
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg-start: #0f172a;
+            --bg-end: #1e293b;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --muted: #6b7280;
+            --primary: #4f46e5;
+            --primary-600: #4338ca;
+            --accent: #22c55e;
+            --accent-600: #16a34a;
+            --ring: rgba(79, 70, 229, 0.15);
+            --border: #e5e7eb;
+            --card: #0b1220;
+            --card-border: #141c2b;
+            --input-bg: #0f1b2d;
+            --input-border: #1e2a44;
+            --heading-start: #a78bfa;
+            --heading-end: #60a5fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", "Fira Sans Condensed", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(1200px 600px at 20% 0%, rgba(79, 70, 229, 0.08), transparent 60%),
+                radial-gradient(1000px 500px at 100% 100%, rgba(17, 94, 89, 0.06), transparent 60%),
+                linear-gradient(180deg, var(--bg-start), var(--bg-end));
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--heading-start);
+            text-decoration: none;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            font-weight: 500;
+            color: #cbd5e1;
+        }
+
+        /* Shared nav-button base */
+        .logout-btn,
+        .history-btn,
+        .settings-btn {
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .logout-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background: var(--accent-600);
+            transform: translateY(-1px);
+        }
+
+        .history-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .history-btn:hover {
+            background: var(--primary-600);
+            transform: translateY(-1px);
+        }
+
+        /* Settings Button */
+        .settings-btn {
+            background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 100%);
+            color: #fff;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            box-shadow: 0 4px 14px rgba(109, 40, 217, 0.4);
+        }
+
+        .settings-btn:hover {
+            background: linear-gradient(135deg, #7c3aed 0%, #4338ca 100%);
+            box-shadow: 0 6px 18px rgba(109, 40, 217, 0.55);
+            transform: translateY(-1px);
+        }
+
+        .settings-btn svg {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Settings Panel */
+        .settings-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1998;
+        }
+
+        .settings-overlay.open {
+            display: block;
+        }
+
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100vh;
+            background: #0f172a;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1999;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -8px 0 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .settings-panel.open {
+            transform: translateX(0);
+        }
+
+        .settings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 1.4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .settings-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+        .settings-close {
+            background: rgba(255, 255, 255, 0.07);
+            border: none;
+            color: #94a3b8;
+            border-radius: 6px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+
+        .settings-close:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: #e2e8f0;
+        }
+
+        .settings-menu {
+            padding: 1rem 0;
+            flex: 1;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0.9rem 1.4rem;
+            cursor: pointer;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .settings-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #f1f5f9;
+        }
+
+        .settings-item-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .si-purple {
+            background: rgba(167, 139, 250, 0.18);
+        }
+
+        .si-orange {
+            background: rgba(251, 146, 60, 0.18);
+        }
+
+        .si-blue {
+            background: rgba(96, 165, 250, 0.18);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            text-align: center;
+            margin: 1rem 0 0.5rem;
+            font-size: 3rem;
+            background: linear-gradient(90deg, var(--heading-start), var(--heading-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            text-align: center;
+            color: #93c5fd;
+            opacity: 0.9;
+            max-width: 820px;
+            margin: 0 auto 2rem;
+            font-weight: 500;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2rem auto 3rem;
+            max-width: 980px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            color: #e5e7eb;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 12px 0 6px;
+            color: #e2e8f0;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #94a3b8;
+            margin-bottom: 16px;
+        }
+
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--heading-start) 0%, var(--heading-end) 100%);
+            color: white;
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .pill-input {
+            position: relative;
+            margin: 10px 0 16px;
+        }
+
+        .pill-input input {
+            width: 100%;
+            padding: 16px 16px 16px 48px;
+            border: 1.5px solid var(--input-border);
+            border-radius: 9999px;
+            font-size: 1rem;
+            background: var(--input-bg);
+            color: #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .pill-input input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #0b1727;
+            box-shadow: 0 0 0 6px var(--ring);
+        }
+
+        .pill-input svg {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: #94a3b8;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px 16px;
+            border: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-600) 100%);
+            color: white;
+            box-shadow: 0 18px 36px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 32px rgba(22, 163, 74, 0.34);
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            padding: 1.6rem;
+            border-radius: 16px;
+            box-shadow: 0 18px 48px rgba(2, 6, 23, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .feature-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 72px rgba(2, 6, 23, 0.6), 0 0 0 1px rgba(96, 165, 250, 0.25);
+        }
+
+        .fe-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.25) 0%, rgba(96, 165, 250, 0.25) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 18px rgba(96, 165, 250, 0.25);
+        }
+
+        .fe-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .feature-description {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Recent Activity */
+        .activity {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .activity h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-text {
+            color: #555;
+        }
+
+        .activity-time {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .join-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .welcome-message {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">SPATIAL MEET</a>
+            <div class="user-info">
+                <span class="user-name" id="userName">Loading...</span>
+                <a href="session-history.html" class="history-btn">📊 Session History</a>
+                <button class="settings-btn" id="settingsToggleBtn" onclick="toggleSettings()" aria-label="Settings">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    Settings
+                </button>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Settings Overlay (click outside to close) -->
+    <div class="settings-overlay" id="settingsOverlay" onclick="closeSettings()"></div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel" role="dialog" aria-label="Settings">
+        <div class="settings-header">
+            <h2>Settings</h2>
+            <button class="settings-close" onclick="closeSettings()">Close</button>
+        </div>
+        <div class="settings-menu">
+            <button class="settings-item" onclick="handleSettingsAction('edit-profile')">
+                <span class="settings-item-icon si-purple">👤</span>
+                Edit Profile
+            </button>
+            <button class="settings-item" onclick="handleSettingsAction('change-avatar')">
+                <span class="settings-item-icon si-orange">🧑‍🎤</span>
+                Change Avatar
+            </button>
+            <button class="settings-item" onclick="handleSettingsAction('change-password')">
+                <span class="settings-item-icon si-blue">🔒</span>
+                Change Password
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="welcome-message" id="welcomeMessage">
+            Welcome back! Ready to join the discussion?
+        </div>
+
+        <h1 class="hero-title">Meet with 3D Avatars</h1>
+        <p class="hero-subtitle">Join video conferences where your face controls a 3D avatar in real‑time</p>
+        <div class="cards">
+            <div class="card">
+                <div class="icon-circle">+</div>
+                <h3>Create Room</h3>
+                <p>Start a new conference and invite others to join</p>
+                <button class="btn btn-primary" id="createRoomBtn">Create New Room</button>
+            </div>
+            <div class="card">
+                <div class="icon-circle">→</div>
+                <h3>Join Room</h3>
+                <p>Enter code to join an existing conference</p>
+                <div class="pill-input">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0Zm5-1h8v2H8v-2Z" />
+                    </svg>
+                    <input id="joinCodeInput" placeholder="Enter 6-digit code">
+                </div>
+                <div class="pill-input">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5.33 0-8 2.667-8 6v2h16v-2c0-3.333-2.67-6-8-6Z" />
+                    </svg>
+                    <input id="joinNameInput" placeholder="Your Name">
+                </div>
+                <button class="btn btn-primary" id="joinRoomBtn">Join Room</button>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="feature-card">
+                <div class="fe-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="grad-avatar" x1="0" y1="0" x2="1" y2="1">
+                                <stop stop-color="#a78bfa" />
+                                <stop offset="1" stop-color="#60a5fa" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M12 2l8 4v8l-8 4l-8-4V6l8-4z" stroke="url(#grad-avatar)" />
+                        <path d="M12 2v12" stroke="url(#grad-avatar)" />
+                        <path d="M20 6l-8 4l-8-4" stroke="url(#grad-avatar)" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">3D Avatars</h3>
+                <p class="feature-description">Express yourself with realistic 3D avatars that represent you in career
+                    discussions</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="fe-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="grad-chat" x1="0" y1="0" x2="1" y2="1">
+                                <stop stop-color="#60a5fa" />
+                                <stop offset="1" stop-color="#22c55e" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M4 4h10a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H9l-5 4V7a3 3 0 0 1 3-3z"
+                            stroke="url(#grad-chat)" />
+                        <path d="M14 8h4a2 2 0 0 1 2 2v6l-3-2h-3" stroke="url(#grad-chat)" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Job Discussions</h3>
+                <p class="feature-description">Engage in real‑time AI‑guided conversations about careers and
+                    opportunities</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="fe-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="grad-ai" x1="0" y1="0" x2="1" y2="1">
+                                <stop stop-color="#a78bfa" />
+                                <stop offset="1" stop-color="#22c55e" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="7" y="7" width="10" height="10" rx="2" stroke="url(#grad-ai)" />
+                        <path d="M4 12h3M17 12h3M12 4v3M12 17v3" stroke="url(#grad-ai)" />
+                        <circle cx="12" cy="12" r="1.5" stroke="url(#grad-ai)" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">AI Career Assistant</h3>
+                <p class="feature-description">Get personalized guidance powered by intelligent recommendations</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="fe-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <defs>
+                            <linearGradient id="grad-secure" x1="0" y1="0" x2="1" y2="1">
+                                <stop stop-color="#60a5fa" />
+                                <stop offset="1" stop-color="#a78bfa" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M12 3l7 3v6a9 9 0 0 1-7 8a9 9 0 0 1-7-8V6l7-3z" stroke="url(#grad-secure)" />
+                        <rect x="9" y="10" width="6" height="5" rx="2" stroke="url(#grad-secure)" />
+                        <path d="M12 10V9a2 2 0 1 1 4 0v1" stroke="url(#grad-secure)" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Private & Secure</h3>
+                <p class="feature-description">Conversations are protected with strong security and privacy safeguards
+                </p>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" id="activeUsers">0</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalSessions">0</span>
+                    <span class="stat-label">Sessions Today</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="avgDuration">0</span>
+                    <span class="stat-label">Avg Duration (min)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="satisfaction">0%</span>
+                    <span class="stat-label">Satisfaction Rate</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="activity">
+            <h2>Recent Activity</h2>
+            <ul class="activity-list" id="activityList">
+                <li class="activity-item">
+                    <span class="activity-text">Welcome to Student Conference!</span>
+                    <span class="activity-time">Just now</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        // Load user data on page load
+        window.addEventListener('load', async () => {
+            try {
+                showLoading(true);
+                const response = await fetch('/api/user-info');
+                const result = await response.json();
+
+                if (result.success) {
+                    currentUser = result.user;
+                    updateUI();
+                    loadStats();
+                    loadActivity();
+                    wireLandingActions();
+                } else {
+                    // Not authenticated, redirect to login
+                    window.location.href = '/login.html';
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                window.location.href = '/login.html';
+            } finally {
+                showLoading(false);
+            }
+        });
+
+        function updateUI() {
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.full_name || currentUser.username;
+                document.getElementById('welcomeMessage').textContent =
+                    `Welcome back, ${currentUser.full_name || currentUser.username}! Ready to join the discussion?`;
+            }
+        }
+
+        function wireLandingActions() {
+            const createBtn = document.getElementById('createRoomBtn');
+            const joinBtn = document.getElementById('joinRoomBtn');
+            if (createBtn) {
+                createBtn.addEventListener('click', () => {
+                    const id = generateRoomId();
+                    navigateToConference(id, currentUser ? (currentUser.full_name || currentUser.username) : '');
+                });
+            }
+            if (joinBtn) {
+                joinBtn.addEventListener('click', () => {
+                    const roomId = (document.getElementById('joinCodeInput')?.value || '').trim();
+                    const name = (document.getElementById('joinNameInput')?.value || '').trim() || (currentUser ? (currentUser.full_name || currentUser.username) : '');
+                    if (!roomId) {
+                        alert('Please enter a room code');
+                        return;
+                    }
+                    if (!name) {
+                        alert('Please enter your name');
+                        return;
+                    }
+                    navigateToConference(roomId, name);
+                });
+            }
+        }
+
+        function generateRoomId() {
+            const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+            const nums = Math.floor(100000 + Math.random() * 900000).toString();
+            const prefix = letters[Math.floor(Math.random() * letters.length)];
+            return `${prefix}${nums}`;
+        }
+
+        function navigateToConference(roomId, name) {
+            if (currentUser) {
+                const updatedUser = { ...currentUser, display_name: name };
+                sessionStorage.setItem('conferenceUser', JSON.stringify(updatedUser));
+            }
+            window.location.href = `/conference.html?roomId=${encodeURIComponent(roomId)}&name=${encodeURIComponent(name)}`;
+        }
+
+        async function loadStats() {
+            // Simulated stats - in real app, this would come from server
+            const stats = {
+                activeUsers: Math.floor(Math.random() * 50) + 10,
+                totalSessions: Math.floor(Math.random() * 200) + 50,
+                avgDuration: Math.floor(Math.random() * 60) + 15,
+                satisfaction: Math.floor(Math.random() * 20) + 80
+            };
+
+            document.getElementById('activeUsers').textContent = stats.activeUsers;
+            document.getElementById('totalSessions').textContent = stats.totalSessions;
+            document.getElementById('avgDuration').textContent = stats.avgDuration;
+            document.getElementById('satisfaction').textContent = stats.satisfaction + '%';
+        }
+
+        async function loadActivity() {
+            // Simulated activity - in real app, this would come from server
+            const activities = [
+                { text: 'System initialized successfully', time: '2 min ago' },
+                { text: 'New user joined the platform', time: '5 min ago' },
+                { text: 'Conference room updated', time: '10 min ago' },
+                { text: 'AI assistant enhanced', time: '15 min ago' }
+            ];
+
+            const activityList = document.getElementById('activityList');
+            activityList.innerHTML = '';
+
+            activities.forEach(activity => {
+                const li = document.createElement('li');
+                li.className = 'activity-item';
+                li.innerHTML = `
+                    <span class="activity-text">${activity.text}</span>
+                    <span class="activity-time">${activity.time}</span>
+                `;
+                activityList.appendChild(li);
+            });
+        }
+
+        function joinConference() {
+            // Get inputs
+            const roomId = document.getElementById('roomIdInput').value.trim() || 'lobby';
+            let peerName = document.getElementById('peerNameInput').value.trim();
+
+            // If no name entered, use logged in name
+            if (!peerName && currentUser) {
+                peerName = currentUser.full_name || currentUser.username;
+            }
+
+            if (!peerName) {
+                alert('Please enter your name');
+                return;
+            }
+
+            // Store user info and redirect with params
+            if (currentUser) {
+                // Update session storage with potentially new name preference
+                const updatedUser = { ...currentUser, display_name: peerName };
+                sessionStorage.setItem('conferenceUser', JSON.stringify(updatedUser)); // Keep for session check
+
+                // Redirect with query params
+                window.location.href = `/conference.html?roomId=${encodeURIComponent(roomId)}&name=${encodeURIComponent(peerName)}`;
+            }
+        }
+
+        async function logout() {
+            try {
+                showLoading(true);
+                await fetch('/api/logout', { method: 'POST' });
+                window.location.href = '/login.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                // Even if logout fails, redirect to login
+                window.location.href = '/login.html';
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+
+        // ── Settings panel ────────────────────────────────────────────
+        function toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            const overlay = document.getElementById('settingsOverlay');
+            const isOpen = panel.classList.contains('open');
+            if (isOpen) {
+                closeSettings();
+            } else {
+                panel.classList.add('open');
+                overlay.classList.add('open');
+            }
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsPanel').classList.remove('open');
+            document.getElementById('settingsOverlay').classList.remove('open');
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeSettings();
+        });
+
+        function handleSettingsAction(action) {
+            closeSettings();
+            if (action === 'edit-profile') {
+                window.location.href = '/edit-profile.html';
+            } else if (action === 'change-avatar') {
+                window.location.href = '/change-avatar.html';
+            } else if (action === 'change-password') {
+                alert('Change Password — coming soon!');
+            }
+        }
+
+        // Update stats periodically
+        setInterval(() => {
+            if (currentUser) {
+                loadStats();
+            }
+        }, 30000); // Update every 30 seconds
+    </script>
+</body>
+
+</html>

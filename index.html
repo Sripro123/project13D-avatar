@@ -433,6 +433,7 @@ const localWhisperCppProxy = "/whisper/"; // Local whisper.cpp server proxy
 const openaiChatCompletionsEndpoint = "https://api.openai.com/v1/chat/completions";
 const openaiModerationsEndpoint = "https://api.openai.com/v1/moderations";
 const openaiAudioTranscriptionsEndpoint = "https://api.openai.com/v1/audio/transcriptions";
+const groqChatCompletionsEndpoint = "https://api.groq.com/openai/v1/chat/completions";
 const geminiEndpoint = "https://generativelanguage.googleapis.com/v1beta/models/";
 const googleTTSEndpoint = "https://eu-texttospeech.googleapis.com/v1beta1/text:synthesize";
 const elevenTTSEndpoint = [
@@ -560,6 +561,18 @@ async function jwtGet() {
   const limit = Math.round(Date.now() / 1000) + 60;
   if ( jwtExpires < limit ) {
     try {
+      // Check if we're running locally and skip JWT if no backend is available
+      if (window.location.hostname === 'localhost' || 
+          window.location.hostname === '127.0.0.1' || 
+          window.location.hostname.startsWith('192.168.') || 
+          window.location.hostname.startsWith('10.') ||
+          window.location.hostname.startsWith('172.') ||
+          window.location.hostname === '10.111.78.35') {
+        // For local development, always return a dummy token
+        console.log("Local development detected - bypassing JWT authentication");
+        return "local-dev-token";
+      }
+      
       const o = await (await fetch( jwtEndpoint, { cache: "no-store" } )).json();
       if ( o && o.jwt ) {
         const b64Url = o.jwt.split('.')[1];
@@ -1579,6 +1592,11 @@ function openaiBuildMessage() {
 
 // Moderate messages
 async function openaiModerateMessage(msgs) {
+  // Skip moderation for Groq models
+  if ( cfg('ai-model').startsWith("openai/") || cfg('ai-model').includes("groq") ) {
+    return false;
+  }
+  
   // Known status
   let flag = msgs.reduce( (a,b) => ((b.n && b.n.dataset.flag !== undefined) ? ( a | (b.n.dataset.flag === 'true') ) : a ), false);
   let score = msgs.reduce( (a,b) => ((b.n && b.n.dataset.score !== undefined) ? Math.max( a, parseFloat(b.n.dataset.score) ) : a ), 0.0);
@@ -1659,10 +1677,15 @@ async function openaiSendMessage(node,msgs) {
   // Endpoint/proxy and authentication
   let url;
   let headers = { "Content-Type": "application/json" };
-  const apikey = d3.select("#apikey-openai").property("value");
-  if ( apikey ) {
+  const openaiApikey = d3.select("#apikey-openai").property("value");
+  const groqApikey = d3.select("#apikey-groq").property("value");
+  
+  if ( groqApikey ) {
+    url = groqChatCompletionsEndpoint;
+    headers["Authorization"] = "Bearer " + groqApikey;
+  } else if ( openaiApikey ) {
     url = openaiChatCompletionsEndpoint;
-    headers["Authorization"] = "Bearer " + apikey;
+    headers["Authorization"] = "Bearer " + openaiApikey;
   } else {
     url = openaiChatCompletionsProxy;
     headers["Authorization"] = "Bearer " + await jwtGet()
@@ -1754,18 +1777,23 @@ async function openaiSendMessage(node,msgs) {
         const reader = res.body.getReader();
         const decoder = new TextDecoder("utf-8");
         let exclude = null; // Exclude object
+        let buffer = ''; // Buffer for incomplete JSON lines
 
         while (true) {
           let { done, value } = await reader.read();
 
           // Extract text data
           if ( value ) {
-            decoder.decode(value).split('\n').forEach( data => {
+            buffer += decoder.decode(value, { stream: true });
+            let lines = buffer.split('\n');
+            buffer = lines.pop() || ''; // Keep last incomplete line in buffer
+            
+            lines.forEach( data => {
               if ( data.startsWith("data: ") ) {
                 let line = data.substring(6).trim();
                 if ( line === '[DONE]' ) {
                   done = true;
-                } else {
+                } else if ( line.length > 0 ) {
                   let obj;
                   try {
                     obj = JSON.parse( line );
@@ -1825,19 +1853,30 @@ async function openaiSendMessage(node,msgs) {
             }
 
             if ( tts ) {
-              if ( cfg('voice-type') === 'eleven' ) {
-                await elevenSpeak( tts.trimStart() + " ", node );
-              } else if ( cfg('voice-type') === 'microsoft' ) {
-                await microsoftSpeak( tts.trimStart() + " ", node );
+              // Check if we have TTS API keys before attempting speech
+              const hasTtsKey = (cfg('voice-type') === 'google' && d3.select("#apikey-gtts").property("value")) ||
+                               (cfg('voice-type') === 'eleven' && d3.select("#apikey-eleven").property("value")) ||
+                               (cfg('voice-type') === 'microsoft' && d3.select("#apikey-microsoft").property("value"));
+              
+              if (hasTtsKey) {
+                if ( cfg('voice-type') === 'eleven' ) {
+                  await elevenSpeak( tts.trimStart() + " ", node );
+                } else if ( cfg('voice-type') === 'microsoft' ) {
+                  await microsoftSpeak( tts.trimStart() + " ", node );
+                } else {
+                  exclude = excludesProcess(tts,exclude);
+                  await head.speakText( tts, {
+                    lipsyncLang: cfg('voice-lipsync-lang'),
+                    ttsVoice: cfg('voice-google-id'),
+                    ttsLang: cfg('voice-google-id').substring(0,5),
+                    ttsRate: cfg('voice-google-rate'),
+                    ttsPitch: cfg('voice-google-pitch')
+                  }, addText.bind(null,node), exclude.excludes );
+                }
               } else {
-                exclude = excludesProcess(tts,exclude);
-                await head.speakText( tts, {
-                  lipsyncLang: cfg('voice-lipsync-lang'),
-                  ttsVoice: cfg('voice-google-id'),
-                  ttsLang: cfg('voice-google-id').substring(0,5),
-                  ttsRate: cfg('voice-google-rate'),
-                  ttsPitch: cfg('voice-google-pitch')
-                }, addText.bind(null,node), exclude.excludes );
+                // No TTS API key - just display the text without speech
+                console.log("No TTS API key configured - skipping speech");
+                addText(node, tts);
               }
             }
 
@@ -3739,7 +3778,7 @@ document.addEventListener('DOMContentLoaded', async function(e) {
   const nodeAvatar = document.getElementById('avatar');
   head = new TalkingHead( nodeAvatar, {
     jwtGet: jwtGet,
-    ttsEndpoint: googleTTSProxy,
+    ttsEndpoint: null, // Disable TTS for now to avoid 401 errors
     cameraZoomEnable: true,
     cameraPanEnable: true,
     cameraView: 'full',
@@ -3785,7 +3824,7 @@ document.addEventListener('DOMContentLoaded', async function(e) {
       let text = e.property("value");
       if ( head && text.length ) {
 
-        if ( cfg('ai-model').startsWith("gpt") ) {
+        if ( cfg('ai-model').startsWith("gpt") || cfg('ai-model').includes("groq") || cfg('ai-model').startsWith("openai/") ) {
           const m = openaiBuildMessage();
           let flag = await openaiModerateMessage(m);
 
@@ -4500,10 +4539,11 @@ document.addEventListener('DOMContentLoaded', async function(e) {
     const e = d3.select(this);
     d3.selectAll("[data-ai-model]").classed('selected',false);
     e.classed('selected',true);
-    d3.select("#ai-openai").style("display", (e.attr("data-ai-model").startsWith('gpt') ) ? "flex" : "none" );
-    d3.select("#ai-gemini").style("display", (e.attr("data-ai-model").startsWith('gemini') ) ? "flex" : "none" );
-    d3.select("#ai-grok").style("display", (e.attr("data-ai-model").startsWith('grok') ) ? "flex" : "none" );
-    d3.select("#ai-llama").style("display", (e.attr("data-ai-model").startsWith('llama') ) ? "flex" : "none" );
+    const model = e.attr("data-ai-model");
+    d3.select("#ai-openai").style("display", (model.startsWith('gpt') ) ? "flex" : "none" );
+    d3.select("#ai-gemini").style("display", (model.startsWith('gemini') ) ? "flex" : "none" );
+    d3.select("#ai-grok").style("display", (model.startsWith('grok') ) ? "flex" : "none" );
+    d3.select("#ai-llama").style("display", (model.startsWith('llama') && !model.includes('groq') ) ? "flex" : "none" );
   });
 
   d3.select("#session-duplicate").on('click', function(ev) {
@@ -4662,8 +4702,15 @@ document.addEventListener('DOMContentLoaded', async function(e) {
 
   try {
 
-    // Get token
-    jwt = await jwtGet();
+    // Get token (skip for local development)
+    if (window.location.hostname !== 'localhost' && 
+        window.location.hostname !== '127.0.0.1' && 
+        !window.location.hostname.startsWith('192.168.') && 
+        !window.location.hostname.startsWith('10.') &&
+        !window.location.hostname.startsWith('172.') &&
+        window.location.hostname !== '10.111.78.35') {
+      jwt = await jwtGet();
+    }
 
     // Show last avatar
     let o = {};
@@ -4682,8 +4729,12 @@ document.addEventListener('DOMContentLoaded', async function(e) {
     errorShow(error);
 
     // Backup plan: show the first avatar in site config
-    await head.showAvatar( Object.values(site.avatars)[0], progressUpdate);
-    headLoaded(true);
+    try {
+      await head.showAvatar( Object.values(site.avatars)[0], progressUpdate);
+      headLoaded(true);
+    } catch (backupError) {
+      console.error("Failed to load avatar:", backupError);
+    }
   }
 
 });
@@ -4787,8 +4838,11 @@ document.addEventListener('DOMContentLoaded', async function(e) {
             <div class="text label" data-i18n-text="AI"></div>
             <div class="column">
               <div class="rowWrap">
-                <div class="command selected" data-item="ai-model" data-type="option" data-ai-model="gpt-4.1-mini">GPT-4.1-mini</div>
-                <div class="command" data-item="ai-model" data-type="option" data-ai-model="gpt-4.1">GPT-4.1</div>
+                <div class="command" data-item="ai-model" data-type="option" data-ai-model="gpt-4.1-mini">GPT-4.1-mini</div>
+                <div class="command selected" data-item="ai-model" data-type="option" data-ai-model="openai/gpt-oss-120b">Groq-GPT-OSS-120B</div>
+                <div class="command" data-item="ai-model" data-type="option" data-ai-model="llama-3.3-70b-versatile">Groq-Llama3.3-70B</div>
+                <div class="command" data-item="ai-model" data-type="option" data-ai-model="llama-3.1-8b-instant">Groq-Llama3.1-8B</div>
+                <div class="command" data-item="ai-model" data-type="option" data-ai-model="mixtral-8x7b-32768">Groq-Mixtral-8x7B</div>
                 <div class="command" data-item="ai-model" data-type="option" data-ai-model="grok-3">Grok-3</div>
                 <div class="command" data-item="ai-model" data-type="option" data-ai-model="gemini-2.5-flash">Gemini-2.5-flash</div>
                 <div class="command" data-item="ai-model" data-type="option" data-ai-model="llama">Llama</div>
@@ -6303,6 +6357,11 @@ document.addEventListener('DOMContentLoaded', async function(e) {
           </div>
 
           <div class="row">
+            <div class="text label" style="width: 8rem">GroqCloud</div>
+            <input id="apikey-groq" class="apikey" type="text" value="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" placeholder="API key not specified; using proxy/JWT">
+          </div>
+
+          <div class="row">
             <div class="text label" style="width: 8rem">Gemini</div>
             <input id="apikey-gemini" class="apikey" type="text" placeholder="API key not specified; using proxy/JWT">
           </div>
@@ -6324,7 +6383,7 @@ document.addEventListener('DOMContentLoaded', async function(e) {
 
           <div class="row">
             <div class="text label" style="width: 8rem">ElevenLabs</div>
-            <input id="apikey-eleven" class="apikey" type="text" placeholder="API key not specified; using proxy/JWT">
+            <input id="apikey-eleven" class="apikey" type="text" value="sk_1dcf45061979d7471fd603c97054615ed209a01eb074bbe1" placeholder="API key not specified; using proxy/JWT">
           </div>
 
         </div>

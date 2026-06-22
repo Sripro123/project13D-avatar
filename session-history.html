@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPATIAL MEET - Session History</title>
+    <link rel="icon" type="image/jpg" href="favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-start: #0f172a;
+            --bg-end: #1e293b;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --muted: #6b7280;
+            --primary: #4f46e5;
+            --primary-600: #4338ca;
+            --accent: #22c55e;
+            --accent-600: #16a34a;
+            --ring: rgba(79, 70, 229, 0.15);
+            --border: #e5e7eb;
+            --card: #0b1220;
+            --card-border: #141c2b;
+            --input-bg: #0f1b2d;
+            --input-border: #1e2a44;
+            --heading-start: #a78bfa;
+            --heading-end: #60a5fa;
+            --danger: #ef4444;
+            --danger-600: #dc2626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:
+                radial-gradient(1200px 600px at 20% 0%, rgba(79, 70, 229, 0.08), transparent 60%),
+                radial-gradient(1000px 500px at 100% 100%, rgba(17, 94, 89, 0.06), transparent 60%),
+                linear-gradient(180deg, var(--bg-start), var(--bg-end));
+            min-height: 100vh;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--heading-start);
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--heading-start), var(--heading-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .nav-btn {
+            padding: 0.5rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .logout-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background: var(--accent-600);
+            transform: translateY(-1px);
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-600);
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 1rem 0 3rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, var(--heading-start), var(--heading-end));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #93c5fd;
+            opacity: 0.9;
+            max-width: 820px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+        /* Session History Section */
+        .sessions-section {
+            background: var(--card);
+            border: 1px solid var(--card-border);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(2, 6, 23, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            margin-bottom: 3rem;
+        }
+
+        .sessions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1.5rem;
+        }
+
+        .sessions-header h2 {
+            color: #e2e8f0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .clear-btn {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .clear-btn:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            transform: translateY(-1px);
+        }
+
+        .debug-btn {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        /* Session Cards */
+        .sessions-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .session-card {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.8rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease backwards;
+        }
+
+        .session-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(96, 165, 250, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+            background: #1e293b;
+        }
+
+        .session-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.2rem;
+        }
+
+        .session-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 0.5rem;
+        }
+
+        .session-meta {
+            display: flex;
+            gap: 1.2rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .session-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-600) 100%);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+            background: linear-gradient(135deg, var(--primary-600) 0%, #3730a3 100%);
+        }
+
+        .session-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.4rem;
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--heading-end);
+            display: block;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .session-transcript {
+            margin: 1.2rem 0;
+            padding: 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .session-transcript h4 {
+            color: #f1f5f9;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .session-transcript p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* Recommendations Section */
+        .recommendations {
+            margin-top: 1.2rem;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.15) 0%, rgba(96, 165, 250, 0.15) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            color: #e2e8f0;
+        }
+
+        .recommendations h4 {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #a78bfa;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        .recommendations li:before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #a78bfa;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #94a3b8;
+        }
+
+        .empty-state-icon {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        .empty-state h3 {
+            color: #f1f5f9;
+            margin-bottom: 0.8rem;
+            font-size: 1.6rem;
+        }
+
+        .empty-state p {
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        .start-new-btn {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-600) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .start-new-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(22, 163, 74, 0.35);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            border: 3.5px solid rgba(255, 255, 255, 0.1);
+            border-top: 3.5px solid var(--primary);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .sessions-section { padding: 1.5rem; }
+            .sessions-header { 
+                flex-direction: column; 
+                gap: 1.2rem; 
+                align-items: flex-start;
+            }
+            .header-actions { width: 100%; }
+            .clear-btn, .debug-btn { flex: 1; text-align: center; }
+            .session-header { flex-direction: column; gap: 1rem; }
+            .session-meta { flex-wrap: wrap; }
+            .download-btn { width: 100%; text-align: center; }
+        }
+    </style>
+
+    <!-- ✅ jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- ✅ AutoTable plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="landing.html" class="logo">SPATIAL MEET</a>
+            <div class="user-info">
+                <span class="user-name" id="display-name">Guest</span>
+                <a href="landing.html" class="nav-btn back-btn">← Dashboard</a>
+                <button class="nav-btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Session History</h1>
+            <p>Review your past conversations and get personalized recommendations for improvement</p>
+        </section>
+
+        <!-- Sessions Section -->
+        <section class="sessions-section">
+            <div class="sessions-header">
+                <h2>Recent Sessions</h2>
+                <div class="header-actions">
+                    <button class="debug-btn" onclick="debugLocalStorage()">Debug</button>
+                    <button class="clear-btn" onclick="clearHistory()">Clear History</button>
+                </div>
+            </div>
+
+            <div id="sessions-container">
+                <!-- Sessions will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">📝</div>
+                <h3>No Sessions Yet</h3>
+                <p>You haven't completed any sessions yet. Start a new conversation to see your history here!</p>
+                <a href="landing.html" class="start-new-btn">Start New Session</a>
+            </div>
+        </section>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading sessions...</p>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        async function logout() {
+            try {
+                await fetch('/api/logout', { method: 'POST' });
+            } catch (e) {
+                console.error("Logout failed", e);
+            }
+            window.location.href = '/login.html';
+        }
+
+        // Load user data on page load
+        window.addEventListener('load', async () => {
+            try {
+                showLoading(true);
+                const response = await fetch('/api/user-info');
+                const result = await response.json();
+
+                if (result.success) {
+                    currentUser = result.user;
+                    updateUI();
+                    loadSessions();
+                } else {
+                    // Not authenticated, redirect to login
+                    window.location.href = '/login.html';
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                window.location.href = '/login.html';
+            } finally {
+                showLoading(false);
+            }
+        });
+
+        function updateUI() {
+            if (currentUser) {
+                document.getElementById('display-name').textContent = currentUser.full_name || currentUser.username;
+            }
+        }
+
+        function loadSessions() {
+            try {
+                let sessions = [];
+                try {
+                    const storedSessions = localStorage.getItem('conferenceSessions');
+                    console.log(' Raw sessions from localStorage:', storedSessions);
+                    
+                    if (storedSessions) {
+                        sessions = JSON.parse(storedSessions);
+                        console.log(' Parsed sessions count:', sessions.length);
+                        console.log(' Session details:', sessions);
+                    }
+                } catch (parseError) {
+                    console.error('Error parsing session history:', parseError);
+                    console.log('Clearing corrupted session history...');
+                    localStorage.removeItem('conferenceSessions');
+                    sessions = [];
+                    // Optional: Notify user
+                    const container = document.getElementById('sessions-container');
+                    if (container) {
+                        container.innerHTML = `<div class="error-message" style="display:block; background:#f39c12;">
+                            Session history was corrupted and has been reset.
+                        </div>`;
+                        setTimeout(() => {
+                            // Reload to show empty state cleanly
+                            window.location.reload();
+                        }, 2000);
+                        return;
+                    }
+                }
+
+                // Less strict filtering - show all sessions with basic validation
+                const validSessions = sessions.filter(session => {
+                    const hasValidDuration = session.duration && session.duration >= 0; // Allow 0 duration
+                    const hasTranscript = session.transcript && session.transcript.trim().length > 0; // Any transcript
+                    const hasQuestions = session.questionCount && session.questionCount >= 0; // Any questions
+                    const hasParticipants = session.participants && session.participants.length >= 0; // Any participants
+                    
+                    console.log(` Session ${session.id} validation:`, {
+                        duration: session.duration,
+                        transcriptLength: session.transcript ? session.transcript.length : 0,
+                        questionCount: session.questionCount,
+                        participantCount: session.participants ? session.participants.length : 0,
+                        hasValidDuration,
+                        hasTranscript,
+                        hasQuestions,
+                        hasParticipants
+                    });
+                    
+                    // Keep session if it exists and has any content
+                    return session && (hasValidDuration || hasTranscript || hasQuestions || hasParticipants);
+                });
+
+                console.log(' Valid sessions after filtering:', validSessions.length);
+
+                const container = document.getElementById('sessions-container');
+                const emptyState = document.getElementById('empty-state');
+
+                if (!validSessions || validSessions.length === 0) {
+                    container.style.display = 'none';
+                    emptyState.style.display = 'block';
+                    console.log(' No valid sessions found - showing empty state');
+                    return;
+                }
+
+                container.style.display = 'block';
+                emptyState.style.display = 'none';
+
+                // Sort sessions by date (newest first)
+                validSessions.sort((a, b) => new Date(b.endTime) - new Date(a.endTime));
+
+                container.innerHTML = validSessions.map((session, index) => createSessionCard(session, index)).join('');
+
+                // Attach event listeners to download buttons
+                document.querySelectorAll('.download-btn').forEach((btn, index) => {
+                    btn.addEventListener('click', () => downloadSessionPDF(validSessions[index]));
+                });
+            } catch (error) {
+                console.error('Error loading sessions:', error);
+                showError('Failed to load sessions: ' + error.message);
+            }
+        }
+
+        async function downloadSessionPDF(session) {
+            try {
+                // Determine which variable holds jsPDF
+                let jsPDFCtor;
+
+                if (window.jspdf && window.jspdf.jsPDF) {
+                    jsPDFCtor = window.jspdf.jsPDF;
+                    console.log("Using window.jspdf.jsPDF");
+                } else if (window.jsPDF) {
+                    jsPDFCtor = window.jsPDF;
+                    console.log("Using window.jsPDF");
+                }
+
+                if (!jsPDFCtor) {
+                    console.error("PDF Library state:", {
+                        'window.jspdf': window.jspdf,
+                        'window.jsPDF': window.jsPDF,
+                        'window.jspdfLoaded': window.jspdfLoaded
+                    });
+                    alert("PDF library failed to initialize. Please check console for debugging info and try refreshing.");
+                    return;
+                }
+
+                const doc = new jsPDFCtor();
+
+                // Verify autotable
+                if (typeof doc.autoTable !== 'function') {
+                    console.warn("AutoTable plugin not found on doc. Checking global plugins...");
+                    // Try to see if we can manually invoke it, or warn user
+                    // Sometimes autotable needs to be initialized if not auto-detected
+                }
+
+                const startDate = new Date(session.startTime);
+                const endDate = new Date(session.endTime);
+                const duration = Math.round((endDate - startDate) / 60000);
+                const recommendations = generateRecommendations(session);
+
+                console.log("Generating PDF for session", session.roomId);
+
+                // Title
+                doc.setFontSize(20);
+                doc.setTextColor(102, 126, 234); // Brand color
+                doc.text("Session History Report", 20, 20);
+
+                doc.setFontSize(12);
+                doc.setTextColor(100);
+                doc.text(`Generated on: ${new Date().toLocaleString()}`, 20, 30);
+
+                // Session Details Table
+                try {
+                    if (doc.autoTable) {
+                        doc.autoTable({
+                            startY: 40,
+                            head: [['Field', 'Value']],
+                            body: [
+                                ['Room ID', session.roomId],
+                                ['Date', startDate.toLocaleDateString()],
+                                ['Time', startDate.toLocaleTimeString()],
+                                ['Duration', `${duration} minutes`],
+                                ['Participants', `${session.participants?.length || 1}`],
+                                ['Questions Answered', `${session.questionCount || 0}`],
+                                ['Words Spoken', `${session.transcript?.split(' ').length || 0}`]
+                            ],
+                            theme: 'striped',
+                            headStyles: { fillColor: [102, 126, 234] }
+                        });
+                    } else {
+                        // Fallback text if table fails
+                        doc.text("Room ID: " + session.roomId, 20, 50);
+                        doc.text("Date: " + startDate.toLocaleDateString(), 20, 60);
+                        // ... basic fallback
+                        console.warn("autoTable not available, using text fallback");
+                    }
+                } catch (e) {
+                    console.error("autoTable error:", e);
+                    alert("Error creating table in PDF. Check console for details.");
+                }
+
+                let finalY = (doc.lastAutoTable && doc.lastAutoTable.finalY) ? doc.lastAutoTable.finalY + 15 : 70;
+
+                // Transcript Section
+                if (session.transcript) {
+                    doc.setFontSize(16);
+                    doc.setTextColor(51, 51, 51);
+                    doc.text("Conversation Transcript", 20, finalY);
+                    finalY += 10;
+
+                    doc.setFontSize(10);
+                    doc.setTextColor(80);
+
+                    const splitText = doc.splitTextToSize(session.transcript, 170);
+                    doc.text(splitText, 20, finalY);
+
+                    // Calculate height of transcript text to adjust next section position
+                    finalY += (splitText.length * 5) + 15;
+                }
+
+                // Page break check for recommendations
+                if (finalY > 250) {
+                    doc.addPage();
+                    finalY = 20;
+                }
+
+                // Recommendations Section
+                if (recommendations.length > 0) {
+                    doc.setFontSize(16);
+                    doc.setTextColor(51, 51, 51);
+                    doc.text("Recommendations", 20, finalY);
+                    finalY += 10;
+
+                    doc.setFontSize(11);
+                    doc.setTextColor(80);
+
+                    recommendations.forEach(rec => {
+                        doc.text(`• ${rec}`, 25, finalY);
+                        finalY += 8;
+                    });
+                }
+
+                // Footer
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(10);
+                    doc.setTextColor(150);
+                    doc.text('3D Avatar Job Discussion AI', 105, 290, null, null, 'center');
+                }
+
+                // Save the PDF
+                console.log("Saving PDF...");
+                doc.save(`session-history-${startDate.toISOString().slice(0, 10)}.pdf`);
+                console.log("PDF saved");
+
+            } catch (error) {
+                console.error("Error generating PDF:", error);
+                alert("Failed to generate PDF. See console for details.");
+            }
+        }
+
+        function generateRecommendations(session) {
+            const recommendations = [];
+            const duration = Math.round((new Date(session.endTime) - new Date(session.startTime)) / 60000);
+            const wordCount = session.transcript?.split(' ').length || 0;
+            const wordsPerMinute = duration > 0 ? Math.round(wordCount / duration) : 0;
+
+            // Duration-based recommendations
+            if (duration < 5) {
+                recommendations.push("Try to extend your sessions to at least 10-15 minutes for more meaningful practice");
+            } else if (duration > 30) {
+                recommendations.push("Great endurance! Consider breaking longer sessions into focused 15-20 minute segments");
+            }
+
+            // Speaking pace recommendations
+            if (wordsPerMinute < 80) {
+                recommendations.push("Try speaking a bit more confidently and at a natural pace to engage better");
+            } else if (wordsPerMinute > 180) {
+                recommendations.push("Excellent enthusiasm! Consider slightly slowing down for clearer articulation");
+            } else {
+                recommendations.push("Good speaking pace - maintain this natural rhythm in future sessions");
+            }
+
+            // Question engagement
+            if (session.questionCount < 3) {
+                recommendations.push("Engage with more questions to practice comprehensive interview skills");
+            } else if (session.questionCount >= session.maxQuestions) {
+                recommendations.push("Outstanding completion! You handled all questions with confidence");
+            }
+
+            // Participation recommendations
+            if (session.participants && session.participants.length > 1) {
+                recommendations.push("Great collaboration practice! Continue developing team communication skills");
+            } else {
+                recommendations.push("Consider joining group sessions to practice team-based discussions");
+            }
+
+            // Transcript length recommendations
+            if (!session.transcript || session.transcript.length < 100) {
+                recommendations.push("Speak more freely during sessions - practice expressing your thoughts clearly");
+            }
+
+            // Add positive reinforcement
+            if (recommendations.length === 0) {
+                recommendations.push("Excellent session performance! Keep up the great work");
+                recommendations.push("Continue practicing to maintain your communication skills");
+            }
+
+            return recommendations.slice(0, 4); // Limit to 4 recommendations
+        }
+
+        function createSessionCard(session, index) {
+            const startDate = new Date(session.startTime);
+            const endDate = new Date(session.endTime);
+            const duration = Math.round((endDate - startDate) / 60000); // minutes
+
+            // Generate recommendations based on session data
+            const recommendations = generateRecommendations(session);
+
+            return `
+                <div class="session-card" style="animation-delay: ${index * 0.1}s">
+                    <div class="session-header">
+                        <div>
+                            <div class="session-title">Session in Room: ${session.roomId}</div>
+                            <div class="session-meta">
+                                <div class="session-meta-item">
+                                    📅 ${startDate.toLocaleDateString()}
+                                </div>
+                                <div class="session-meta-item">
+                                    🕒 ${startDate.toLocaleTimeString()}
+                                </div>
+                                <div class="session-meta-item">
+                                    ⏱️ ${duration} min
+                                </div>
+                            </div>
+                        </div>
+                        <button class="download-btn">
+                            📥 Download PDF
+                        </button>
+                    </div>
+
+                    <div class="session-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">${session.questionCount || 0}</span>
+                            <span class="stat-label">Questions</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">${session.participants?.length || 1}</span>
+                            <span class="stat-label">Participants</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">${duration}</span>
+                            <span class="stat-label">Duration (min)</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">${session.transcript?.split(' ').length || 0}</span>
+                            <span class="stat-label">Words Spoken</span>
+                        </div>
+                    </div>
+
+                    ${session.transcript ? `
+                        <div class="session-transcript">
+                            <h4>📝 Conversation Transcript</h4>
+                            <p>${session.transcript.substring(0, 300)}${session.transcript.length > 300 ? '...' : ''}</p>
+                        </div>
+                    ` : ''}
+
+                    ${recommendations.length > 0 ? `
+                        <div class="recommendations">
+                            <h4>💡 Recommendations for Improvement</h4>
+                            <ul>
+                                ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear all session history? This action cannot be undone.')) {
+                localStorage.removeItem('conferenceSessions');
+                loadSessions();
+            }
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+
+        function showError(message) {
+            const container = document.getElementById('sessions-container');
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">⚠️</div>
+                    <h3>Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+
+        function debugLocalStorage() {
+            console.log('=== DEBUGGING LOCAL STORAGE ===');
+            const allKeys = Object.keys(localStorage);
+            console.log('All localStorage keys:', allKeys);
+            
+            const sessions = localStorage.getItem('conferenceSessions');
+            console.log('Raw conferenceSessions data:', sessions);
+            
+            if (sessions) {
+                try {
+                    const parsed = JSON.parse(sessions);
+                    console.log('Parsed sessions:', parsed);
+                    console.log('Number of sessions:', parsed.length);
+                    
+                    parsed.forEach((session, index) => {
+                        console.log(`Session ${index + 1}:`, {
+                            id: session.id,
+                            roomId: session.roomId,
+                            userName: session.userName,
+                            duration: session.duration,
+                            transcriptLength: session.transcript ? session.transcript.length : 0,
+                            questionCount: session.questionCount,
+                            hasTranscript: !!session.transcript,
+                            startTime: session.startTime,
+                            endTime: session.endTime
+                        });
+                    });
+                } catch (e) {
+                    console.error('Failed to parse sessions:', e);
+                }
+            } else {
+                console.log('No conferenceSessions found in localStorage');
+            }
+            
+            // Test manual save
+            console.log('=== TESTING MANUAL SAVE ===');
+            const testSession = {
+                id: Date.now(),
+                roomId: 'test-room',
+                userName: 'Test User',
+                userId: 'test-user',
+                startTime: new Date().toISOString(),
+                endTime: new Date().toISOString(),
+                duration: 5,
+                transcript: 'This is a test transcript with some content.',
+                questionCount: 2,
+                participants: [],
+                recommendations: []
+            };
+            
+            let existingSessions = JSON.parse(localStorage.getItem('conferenceSessions') || '[]');
+            existingSessions.push(testSession);
+            localStorage.setItem('conferenceSessions', JSON.stringify(existingSessions));
+            console.log('Test session saved, reloading...');
+            
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

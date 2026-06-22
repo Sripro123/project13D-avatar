@@ -1,0 +1,1220 @@
+[
+  {
+    "id": "session-1769497063651",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T06:57:43.651Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769497147026",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T06:59:07.026Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769497359148",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T07:02:39.148Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769497796678",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T07:09:56.678Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769498081622",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T07:14:41.622Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769499075613",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T07:31:15.613Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769499465946",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T07:37:45.946Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769501142625",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T08:05:42.625Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1769501701815",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T08:15:01.815Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1769501702690",
+        "number": 1,
+        "text": "Hello, I’m Maya Patel, a senior engineering manager here.  \n\n**Question 1 of 6:**  \nCould you walk me through your professional background and how it has prepared you for this software development role?",
+        "timestamp": "2026-01-27T08:15:02.690Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1769501879911",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T08:17:59.911Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1769501880586",
+        "number": 1,
+        "text": "Hello, I’m Alex, a senior engineer on the hiring team.  \n\n**Question 1 of 6:** Could you give me a brief overview of your professional background and the key experiences that have prepared you for this role?",
+        "timestamp": "2026-01-27T08:18:00.586Z"
+      },
+      {
+        "id": "q-1769501921731",
+        "number": 2,
+        "text": "Hello again! Let’s move on to the next question.\n\n**Question 2:** Can you describe a time when you had to refactor a piece of legacy code? What was your approach, and what outcome did you achieve?",
+        "timestamp": "2026-01-27T08:18:41.731Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1769503538785",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T08:45:38.785Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1769503539662",
+        "number": 1,
+        "text": "Hello, I’m Maya Patel, the lead engineer for the hiring team.  \n\n**Question 1 of 6:** Could you give me a brief overview of your experience in software development, including the technologies you’ve worked with most frequently?",
+        "timestamp": "2026-01-27T08:45:39.662Z"
+      },
+      {
+        "id": "q-1769503563775",
+        "number": 2,
+        "text": "Yes, I can hear you clearly.  \n\n**Question 2:** Can you describe a time when you had to debug a particularly stubborn issue in production? What steps did you take to identify and resolve it?",
+        "timestamp": "2026-01-27T08:46:03.775Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1769503917918",
+    "roomId": "lobby",
+    "started_at": "2026-01-27T08:51:57.918Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1769503918881",
+        "number": 1,
+        "text": "Good morning, I’m Alex, the hiring lead for the development team.  \n\n**Question 1 of 6:** Could you give me a brief overview of your professional background and the key projects you’ve worked on that are most relevant to this role?",
+        "timestamp": "2026-01-27T08:51:58.881Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1771253284791",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T14:48:04.791Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1771253285417",
+        "number": 1,
+        "text": "Hello, I’m Alex Rivera, senior engineering manager here at TechNova.  \n**Question 1 of 6:** Could you walk me through your professional background and the experience most relevant to this software development role?",
+        "timestamp": "2026-02-16T14:48:05.417Z"
+      },
+      {
+        "id": "q-1771253312274",
+        "number": 2,
+        "text": "Yes, I can hear you.  \n**Question 2:** Can you describe a particularly challenging bug you encountered in a recent project and walk me through the steps you took to diagnose and resolve it?",
+        "timestamp": "2026-02-16T14:48:32.274Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1771253539000",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T14:52:19.000Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1771253539730",
+        "number": 1,
+        "text": "Good morning, I'm Alex, the lead developer here. Thank you for taking the time to meet with us.\n\n**Question 1 of 6:** Could you give me a brief overview of your professional background and the key projects that have shaped your software development experience?",
+        "timestamp": "2026-02-16T14:52:19.730Z"
+      },
+      {
+        "id": "q-1771253901751",
+        "number": 2,
+        "text": "Good morning! Thanks for joining us today.  \n\n**Question 2:** Can you walk me through a recent project where you had to design and implement a scalable solution? What were the key architectural decisions you made, and why?",
+        "timestamp": "2026-02-16T14:58:21.752Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1771255022598",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T15:17:02.598Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1771255023120",
+        "number": 1,
+        "text": "Hello, I'm Alex, the hiring lead for the software development team.  \n\n**Question 1 of 6:** Could you give me a brief overview of your professional background and how it has prepared you for this role?",
+        "timestamp": "2026-02-16T15:17:03.120Z"
+      },
+      {
+        "id": "q-1771255044734",
+        "number": 2,
+        "text": "Sure, thanks for sharing that. \n\n**Question 2:** Can you describe a recent project where you had to troubleshoot a performance issue? What steps did you take to identify and resolve it?",
+        "timestamp": "2026-02-16T15:17:24.734Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1771255279062",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T15:21:19.062Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1771255279970",
+        "number": 1,
+        "text": "Hello, thank you for joining us.  \n**Question 1 of 6:** Could you briefly describe your software development experience and the primary technologies you have worked with?",
+        "timestamp": "2026-02-16T15:21:19.970Z"
+      },
+      {
+        "id": "q-1771255302274",
+        "number": 2,
+        "text": "Question 2: Can you describe a challenging bug you encountered in that Django project, how you diagnosed it, and what steps you took to resolve it?",
+        "timestamp": "2026-02-16T15:21:42.275Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1771257238100",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T15:53:58.100Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1771257240061",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T15:54:00.061Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1771257304801",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T15:55:04.801Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1771257305560",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T15:55:05.560Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1771257522619",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T15:58:42.619Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1771257615251",
+    "roomId": "lobby",
+    "started_at": "2026-02-16T16:00:15.251Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1772883076441",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T11:31:16.441Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1772883807293",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T11:43:27.293Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1772884162630",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T11:49:22.630Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": []
+  },
+  {
+    "id": "session-1772884609245",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T11:56:49.245Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772884610328",
+        "number": 1,
+        "text": "Good morning, welcome to the interview for the software development position. My name is Rachel Taylor, and I'll be conducting the interview today. Please feel free to make any necessary notes or ask clarifying questions.\n\nTo start, can you briefly walk me through your educational background and relevant work experience in software development? \n\n(please respond with your background information)",
+        "timestamp": "2026-03-07T11:56:50.328Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772885050088",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:04:10.088Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772885050665",
+        "number": 1,
+        "text": "Good morning, thank you for joining us today. My name is Alexander Thompson, and I'm the Tech Lead for Software Development at NovaTech. I'll be conducting your interview today.\n\nBefore we begin, may I start by asking: Can you briefly walk me through your background and relevant experience in software development that has led you to apply for this position?",
+        "timestamp": "2026-03-07T12:04:10.665Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772885594573",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:13:14.573Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772885595125",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Rachel Lee, and I'll be conducting your interview for the software development position. I have reviewed your resume and qualifications, and I'm excited to learn more about your background and experience.\n\nTo start, can you tell me about your educational background and how it has prepared you for a career in software development?",
+        "timestamp": "2026-03-07T12:13:15.125Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772886051843",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:20:51.843Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772886052306",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Emily Wilson, and I'm a Senior Technical Recruiter for Omega Corporation. We're a leading software development company looking for talented individuals to join our team.\n\nTo begin, can you tell me a little bit about your background in software development? What inspired you to pursue a career in this field, and how did you get started?",
+        "timestamp": "2026-03-07T12:20:52.306Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772886333023",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:25:33.023Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772886333407",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Alexandra Thompson, and I'll be conducting your interview for the software development position.\n\nTo start, can you tell me a bit about your background in software development? What motivated you to pursue a career in this field, and what relevant experience or education do you have that aligns with this role?",
+        "timestamp": "2026-03-07T12:25:33.407Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772886713002",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:31:53.002Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772886713663",
+        "number": 1,
+        "text": "Good morning, and welcome to the interview for the software development position. My name is Michael Lee, and I will be assessing your skills and suitability for the role.\n\nTo begin, can you start by telling me a little bit about your educational background and relevant work experience in software development?",
+        "timestamp": "2026-03-07T12:31:53.663Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772887112041",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:38:32.041Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772887112617",
+        "number": 1,
+        "text": "Good morning, and thank you for coming in today. My name is Alex Thompson, and I'll be conducting your interview for the software developer position. Before we begin, may I confirm that you've reviewed the job description and requirements?\n\nCan you start by telling me a little about your background and how your previous experience aligns with this software development role?",
+        "timestamp": "2026-03-07T12:38:32.617Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772887362554",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:42:42.554Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772887363206",
+        "number": 1,
+        "text": "Good morning, thank you for joining us today. My name is Emily Chen, and I'll be conducting your interview for the software development position. I'll be assessing your skills and experience to determine whether you'd be a good fit for our team.\n\nLet's get started with the interview process. Can you please tell me about your educational background and any relevant certifications you may have in software development?",
+        "timestamp": "2026-03-07T12:42:43.206Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772887613708",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:46:53.708Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772887614090",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Rachel Lee, and I'm a member of the hiring team for the software development position at our company.\n\nCan you please start by telling me a little bit about your educational background and any relevant experience you have in software development?",
+        "timestamp": "2026-03-07T12:46:54.090Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772888150484",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:55:50.484Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772888151986",
+        "number": 1,
+        "text": "Welcome to the interview for the software development position. My name is Ms. Thompson, and I will be conducting the evaluation today. \n\nBefore we proceed, I'd like to briefly review your resume and background. However, I'd like to confirm, can you start by telling me about your professional experience in software development, including your current and previous roles, and the technologies you've worked with?",
+        "timestamp": "2026-03-07T12:55:51.986Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772888342149",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T12:59:02.149Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772888342646",
+        "number": 1,
+        "text": "Good morning, and welcome to today's interview. My name is Emily Wilson, and I'll be conducting your software development interview. \n\nPrior to beginning, I'd like to provide a brief overview of the position and our expectations. This role will involve working on complex software applications, collaborating with cross-functional teams, and applying innovative problem-solving skills to drive business growth. \n\nCan you begin by telling me a little about your background in software development? What motivates you to pursue this career path, and how has your educational and professional experience prepared you for this role?",
+        "timestamp": "2026-03-07T12:59:02.646Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772888482638",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:01:22.638Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772888483213",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Alex Chen, and I'll be conducting your interview for the software development position. I'll be assessing your technical skills, experience, and fit for our team.\n\nBefore we begin, can you start by telling me a little bit about your background in software development? What type of projects have you worked on in the past, and what programming languages and technologies are you most familiar with?",
+        "timestamp": "2026-03-07T13:01:23.213Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772888890370",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:08:10.370Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772888890852",
+        "number": 1,
+        "text": "Good morning, I'm Rachel Thompson, a Technical Lead in the software development department here. Thank you for coming in today. I'll be conducting this interview to assess your qualifications for the position. \n\nTo get started, can you walk me through your background in software development? What areas of programming languages and technologies have you worked with throughout your career?",
+        "timestamp": "2026-03-07T13:08:10.852Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772889157928",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:12:37.928Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772889158516",
+        "number": 1,
+        "text": "Good morning, I'm Alexandra Jenkins, a Principal Software Development Manager at NovaTech Corporation. I'll be leading today's interview. \n\nBefore we begin, I'd like to take a moment to review the job description for the Software Development position we're discussing. With that said, could you start by telling me a little bit about your background in software development? What types of technologies have you worked with, and do you have any experience with our company's primary programming languages, such as Java or Python?",
+        "timestamp": "2026-03-07T13:12:38.516Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772889372343",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:16:12.343Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772889372859",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Emily Wilson, and I'll be conducting your interview for the software development position. I have a background in computer science and have been involved in various software projects throughout my career.\n\nTo get started, can you tell me about your educational background in computer science and any relevant projects or experience you've had prior to this role?",
+        "timestamp": "2026-03-07T13:16:12.859Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772889460009",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:17:40.009Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772889460614",
+        "number": 1,
+        "text": "Good morning, and welcome to today's interview. My name is Emily Wilson, and I'll be conducting the interview for the Software Development position. Before we begin, I'd like to take a moment to review the job description and requirements. \n\nAs we discussed in the introduction, your background in software development is highly valued. Given your experience, can you walk me through your educational background and any relevant certifications or training in the field of computer science or software engineering?",
+        "timestamp": "2026-03-07T13:17:40.614Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772889619703",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:20:19.703Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772889620430",
+        "number": 1,
+        "text": "Good morning, thank you for joining me today. My name is Emily Wilson, and I'm a Senior Talent Acquisition Manager at SoftTech Corporation. We're interested in learning more about your background in software development.\n\nCan you start by telling me a little about your educational background and any relevant work experience you have?",
+        "timestamp": "2026-03-07T13:20:20.430Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772889909609",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:25:09.609Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772889910112",
+        "number": 1,
+        "text": "Good morning, and thank you for taking the time to meet with me today. My name is Rachel Lee, and I'm a Technical Recruiter for a leading software development company. We're excited to learn more about your background and how it aligns with our organization's goals.\n\nCan you start by telling me about your educational background in computer science or a related field, and any relevant experience you've had in software development?",
+        "timestamp": "2026-03-07T13:25:10.112Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772890114875",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:28:34.875Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772890115486",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Rachel Lee, a Senior Staff Software Engineer at TechCorp. I'll be conducting your interview for the Software Development position. \n\nLet's get started with the interview. Can you tell me a little bit about your background in software development? What's your educational foundation, relevant work experience, and any notable projects or achievements that demonstrate your expertise?",
+        "timestamp": "2026-03-07T13:28:35.486Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772890398523",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T13:33:18.524Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772890399153",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Rachel Lee, and I'll be conducting this interview. I'm a member of the recruitment team for our software development department. Before we begin, I just want to confirm that you're here to discuss the software development position we posted.\n\nCan you tell me about your background and experience in software development? What specific areas of development do you have the most experience in, such as front-end, back-end, full-stack, or other?",
+        "timestamp": "2026-03-07T13:33:19.153Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772892004325",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:00:04.325Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772892004828",
+        "number": 1,
+        "text": "Good morning, and welcome to the interview for the software development position. My name is Rachel, and I will be conducting this interview today. I will be asking you a series of questions to assess your qualifications, skills, and experience.\n\nCan you begin by telling me about your background in software development? What inspired you to pursue a career in this field, and what motivated you to become a skilled developer?",
+        "timestamp": "2026-03-07T14:00:04.828Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772892525354",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:08:45.354Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772892525942",
+        "number": 1,
+        "text": "Good morning, welcome to the interview for the software development position at our company. My name is Emily Wilson, and I'll be conducting your discussion today. Before we begin, I just want to take a minute to confirm that the details of our conversation will be recorded for review purposes.\n\nLet's get started. Can you please begin by telling me about your educational background in computer science or a related field? What degrees or certifications do you hold, and from which institutions did you graduate?",
+        "timestamp": "2026-03-07T14:08:45.942Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772892916112",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:15:16.112Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772892916712",
+        "number": 1,
+        "text": "Good morning, thank you for coming in today. My name is Emily Wilson, and I'm a senior software development manager here at NovaTech. We're a leading innovator in the field of software development, and we're excited about the prospect of bringing someone with your skills and experience onboard.\n\nBefore we begin, I'd like to briefly review the position you'll be interviewing for: a software developer role, working on our team to develop cutting-edge solutions using Java and Python. With that in mind, could you please tell me about your background in software development, and how your experience aligns with this position?",
+        "timestamp": "2026-03-07T14:15:16.712Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772893015053",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:16:55.053Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772893015428",
+        "number": 1,
+        "text": "Thank you for joining us today. My name is Karen Thompson, and I'll be leading your software development interview. I'll be taking note of your responses and will guide the conversation accordingly.\n\nTo begin, can you walk me through your background in software development? Please share your relevant experience, education, and any notable projects you've worked on in the past.",
+        "timestamp": "2026-03-07T14:16:55.428Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772893507124",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:25:07.124Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772893507984",
+        "number": 1,
+        "text": "Can you briefly describe your experience in software development, highlighting the key technologies and projects you have worked on?",
+        "timestamp": "2026-03-07T14:25:07.984Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772893637239",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:27:17.239Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772893639884",
+        "number": 1,
+        "text": "Thank you for joining. Could you briefly describe your experience in software development, including the primary languages you’ve worked with and any notable projects you’ve contributed to?",
+        "timestamp": "2026-03-07T14:27:19.884Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772893709365",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:28:29.365Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772893710744",
+        "number": 1,
+        "text": "Thank you for joining. Could you give me an overview of your background and experience in software development?",
+        "timestamp": "2026-03-07T14:28:30.744Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772893874410",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:31:14.410Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772893875678",
+        "number": 1,
+        "text": "Could you describe your experience in software development, highlighting the primary technologies you’ve used and the most significant projects you’ve contributed to?",
+        "timestamp": "2026-03-07T14:31:15.678Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772893997779",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:33:17.779Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772893999117",
+        "number": 1,
+        "text": "Good morning. I’m the lead engineer conducting this interview.  \n\nCould you briefly describe your professional background and experience in software development?",
+        "timestamp": "2026-03-07T14:33:19.117Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772894055354",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:34:15.354Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772894056147",
+        "number": 1,
+        "text": "Could you briefly describe your professional background and experience relevant to software development?",
+        "timestamp": "2026-03-07T14:34:16.147Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1772894287702",
+    "roomId": "lobby",
+    "started_at": "2026-03-07T14:38:07.702Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1772894288697",
+        "number": 1,
+        "text": "Can you briefly describe your professional experience and the primary technologies you have worked with?",
+        "timestamp": "2026-03-07T14:38:08.697Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773028549842",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T03:55:49.842Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773028550718",
+        "number": 1,
+        "text": "Good morning. I’m the lead engineer overseeing this interview. To start, could you briefly describe your professional background and the key experiences that have prepared you for this software development role?",
+        "timestamp": "2026-03-09T03:55:50.718Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773028794749",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T03:59:54.749Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773028796168",
+        "number": 1,
+        "text": "Good morning. I’m the lead engineer overseeing this hiring process.  \n\nTo start, could you walk me through your software development experience, highlighting the roles you’ve held and the primary technologies you’ve worked with?",
+        "timestamp": "2026-03-09T03:59:56.168Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773028959388",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:02:39.388Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773028960225",
+        "number": 1,
+        "text": "Can you briefly describe your professional background and experience relevant to software development?",
+        "timestamp": "2026-03-09T04:02:40.225Z"
+      },
+      {
+        "id": "q-1773028973457",
+        "number": 2,
+        "text": "2. Can you describe a particularly challenging bug you encountered in a Django project and the steps you took to resolve it?",
+        "timestamp": "2026-03-09T04:02:53.457Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773029189018",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:06:29.018Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773029190047",
+        "number": 1,
+        "text": "Let's focus on the interview questions.\n\n1. Can you briefly describe your experience in software development, including the key projects and technologies you've worked with?",
+        "timestamp": "2026-03-09T04:06:30.047Z"
+      },
+      {
+        "id": "q-1773029210314",
+        "number": 2,
+        "text": "2. Can you describe a particularly challenging bug you encountered while working with Python/Django and explain how you diagnosed and resolved it?",
+        "timestamp": "2026-03-09T04:06:50.314Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773030346116",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:25:46.116Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773030346768",
+        "number": 1,
+        "text": "Thank you for joining us. Could you briefly describe your experience in software development, including the key technologies and projects you’ve worked on?",
+        "timestamp": "2026-03-09T04:25:46.768Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773031221607",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:40:21.607Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773031222784",
+        "number": 1,
+        "text": "Hello, I’m the hiring manager for the software development team. Could you briefly describe your professional background and experience that’s most relevant to this role?",
+        "timestamp": "2026-03-09T04:40:22.784Z"
+      },
+      {
+        "id": "q-1773031265325",
+        "number": 2,
+        "text": "Let's focus on the interview questions.  \n\n**Question 2:** Can you describe a recent project where you had to troubleshoot a performance bottleneck? What steps did you take to identify and resolve the issue?",
+        "timestamp": "2026-03-09T04:41:05.325Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773031789133",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:49:49.133Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773031790581",
+        "number": 1,
+        "text": "Hello, I'm the lead engineer overseeing this hiring process.  \n\n**First question:** Could you give a brief overview of your software development experience, highlighting the primary languages, frameworks, and projects you’ve worked on?",
+        "timestamp": "2026-03-09T04:49:50.581Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773031799223",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:49:59.224Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773031800297",
+        "number": 1,
+        "text": "Thank you for joining. Could you briefly describe your experience in software development, including the primary technologies and projects you’ve worked on?",
+        "timestamp": "2026-03-09T04:50:00.297Z"
+      },
+      {
+        "id": "q-1773031815903",
+        "number": 1,
+        "text": "Thank you for joining us. To start, could you describe a recent project you worked on, the technologies you used, and your specific contributions to its success?",
+        "timestamp": "2026-03-09T04:50:15.904Z"
+      },
+      {
+        "id": "q-1773031837329",
+        "number": 2,
+        "text": "2. Can you describe a particularly challenging bug you encountered, how you diagnosed the root cause, and the steps you took to resolve it?",
+        "timestamp": "2026-03-09T04:50:37.329Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773032165416",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:56:05.416Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773032166637",
+        "number": 1,
+        "text": "Can you summarize your software development experience, highlighting the primary languages, frameworks, and types of projects you’ve worked on?",
+        "timestamp": "2026-03-09T04:56:06.637Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773032179968",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T04:56:19.968Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773032181125",
+        "number": 1,
+        "text": "Thank you for joining the interview. To start, could you briefly describe your professional background and experience relevant to software development?",
+        "timestamp": "2026-03-09T04:56:21.125Z"
+      },
+      {
+        "id": "q-1773032208165",
+        "number": 1,
+        "text": "Let's focus on the interview questions.\n\n**1.** Can you describe a recent project where you designed and implemented a scalable system? What were the main challenges and how did you address them?",
+        "timestamp": "2026-03-09T04:56:48.166Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773032862326",
+    "roomId": "lobby",
+    "started_at": "2026-03-09T05:07:42.327Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773032863559",
+        "number": 1,
+        "text": "Can you briefly describe your experience in software development, including the key technologies you’ve worked with and the roles you’ve held?",
+        "timestamp": "2026-03-09T05:07:43.559Z"
+      },
+      {
+        "id": "q-1773032877377",
+        "number": 2,
+        "text": "Let's focus on the interview questions.\n\n**Question 2:** Can you describe a time when you had to debug a particularly challenging issue in production? What steps did you take to identify and resolve the problem?",
+        "timestamp": "2026-03-09T05:07:57.377Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773106289984",
+    "roomId": "lobby",
+    "started_at": "2026-03-10T01:31:29.984Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773106291230",
+        "number": 1,
+        "text": "Thank you for meeting with us today. Could you give me a brief overview of your experience in software development?",
+        "timestamp": "2026-03-10T01:31:31.230Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773134721290",
+    "roomId": "Y856949",
+    "started_at": "2026-03-10T09:25:21.291Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773134722877",
+        "number": 1,
+        "text": "Hello, I'm Alex, the lead technical recruiter. Could you give me a brief overview of your professional background and experience in software development?",
+        "timestamp": "2026-03-10T09:25:22.877Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773193031868",
+    "roomId": "C822561",
+    "started_at": "2026-03-11T01:37:11.905Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773193032860",
+        "number": 1,
+        "text": "Could you briefly describe your professional background in software development?",
+        "timestamp": "2026-03-11T01:37:12.860Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773193166748",
+    "roomId": "J238149",
+    "started_at": "2026-03-11T01:39:26.748Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773193167693",
+        "number": 1,
+        "text": "Thank you for joining. Could you describe your experience in software development, including the key technologies and projects you’ve worked on?",
+        "timestamp": "2026-03-11T01:39:27.693Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773231875556",
+    "roomId": "C406187",
+    "started_at": "2026-03-11T12:24:35.558Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773231876511",
+        "number": 1,
+        "text": "Can you briefly describe your professional background and experience relevant to software development?",
+        "timestamp": "2026-03-11T12:24:36.511Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773273306227",
+    "roomId": "W286350",
+    "started_at": "2026-03-11T23:55:06.229Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773273306996",
+        "number": 1,
+        "text": "Let's focus on the interview questions.\n\nCould you briefly describe your professional background and the key experiences that have prepared you for this software development role?",
+        "timestamp": "2026-03-11T23:55:06.996Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773303268741",
+    "roomId": "Q697107",
+    "started_at": "2026-03-12T08:14:28.742Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773303270075",
+        "number": 1,
+        "text": "Can you briefly describe your experience as a software developer, including the primary languages and technologies you have worked with?",
+        "timestamp": "2026-03-12T08:14:30.075Z"
+      },
+      {
+        "id": "q-1773303294386",
+        "number": 2,
+        "text": "Thank you.  \n\n**Question 2:** Can you describe a particularly challenging bug you encountered in a project and explain the steps you took to diagnose and resolve it?",
+        "timestamp": "2026-03-12T08:14:54.386Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1773311758169",
+    "roomId": "X882493",
+    "started_at": "2026-03-12T10:35:58.169Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1773311759080",
+        "number": 1,
+        "text": "Thank you for joining the interview. To start, could you briefly describe your professional background and the key experiences that have prepared you for a software development role?",
+        "timestamp": "2026-03-12T10:35:59.080Z"
+      },
+      {
+        "id": "q-1773311805768",
+        "number": 2,
+        "text": "Question 2: Can you describe a particularly challenging technical problem you encountered in your recent projects and how you approached solving it?",
+        "timestamp": "2026-03-12T10:36:45.768Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1778589781783",
+    "roomId": "T376988",
+    "started_at": "2026-05-12T12:43:01.783Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1778589782936",
+        "number": 1,
+        "text": "Thank you for joining the interview. Could you briefly describe your experience in software development?",
+        "timestamp": "2026-05-12T12:43:02.936Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1778589955290",
+    "roomId": "Y868284",
+    "started_at": "2026-05-12T12:45:55.290Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1778589956329",
+        "number": 1,
+        "text": "Thank you for joining. Could you briefly describe your experience in software development, including the key technologies you've worked with and the most significant projects you've contributed to?",
+        "timestamp": "2026-05-12T12:45:56.329Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1778590298576",
+    "roomId": "K293148",
+    "started_at": "2026-05-12T12:51:38.576Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1778590299405",
+        "number": 1,
+        "text": "Can you briefly describe your experience in software development, including the key technologies you’ve worked with and the roles you’ve held?",
+        "timestamp": "2026-05-12T12:51:39.405Z"
+      }
+    ]
+  },
+  {
+    "id": "session-1778590403630",
+    "roomId": "Y106783",
+    "started_at": "2026-05-12T12:53:23.630Z",
+    "status": "active",
+    "current_question": 0,
+    "answers": [],
+    "questions": [
+      {
+        "id": "q-1778590404498",
+        "number": 1,
+        "text": "Thank you. Could you briefly describe your background and experience in software development?",
+        "timestamp": "2026-05-12T12:53:24.498Z"
+      }
+    ]
+  }
+]

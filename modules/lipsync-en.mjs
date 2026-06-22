@@ -428,7 +428,18 @@ class LipsyncEn {
   * @return {string} Pre-processsed text.
   */
   preProcessText(s) {
-    let r = s.replace('/[#_*\":;]/g','');
+    // Ensure input is a string
+    if (typeof s !== 'string') {
+      console.warn('preProcessText received non-string input:', typeof s, s);
+      // If it's an array, join it first
+      if (Array.isArray(s)) {
+        s = s.join(' ');
+      } else {
+        s = String(s || '');
+      }
+    }
+    
+    let r = s.replace(/[#_*\":;]/g,'');
 
     // Symbols
     r = r.replace( this.symbolsReg, (symbol) => {

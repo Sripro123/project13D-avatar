@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Speech API - Premium Voice Recognition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --error: #ef4444;
+            --accent: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary-light), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            justify-content: center;
+            width: 100%;
+        }
+
+        .status-badge.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+        }
+
+        #startBtn {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        #startBtn:hover:not(:disabled) {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        #stopBtn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #stopBtn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .visualizer-container {
+            height: 60px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            gap: 4px;
+            overflow: hidden;
+        }
+
+        .bar {
+            flex: 1;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: height 0.05s ease;
+            min-height: 4px;
+            max-height: 40px;
+        }
+
+        .transcript-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            min-height: 150px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .interim {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .final {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .error-msg {
+            color: var(--error);
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* Scrollbar styling */
+        .transcript-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .transcript-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .transcript-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--primary);
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            top: -50px;
+            right: -50px;
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.1; transform: scale(1); }
+            to { opacity: 0.3; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glow"></div>
+        <h1>Voice Recognition</h1>
+        <div id="status" class="status-badge">Standby</div>
+        
+        <div class="visualizer-container" id="visualizer">
+            <!-- Bars will be added here -->
+        </div>
+
+        <div class="controls">
+            <button id="startBtn">Start Listening</button>
+            <button id="stopBtn" disabled>Stop</button>
+        </div>
+
+        <div class="transcript-container" id="output">
+            <p id="placeholder" style="color: var(--text-muted); font-size: 0.9rem;">Click start and speak clearly...</p>
+        </div>
+
+        <div id="error" class="error-msg"></div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const output = document.getElementById('output');
+        const statusBadge = document.getElementById('status');
+        const errorMsg = document.getElementById('error');
+        const visualizer = document.getElementById('visualizer');
+
+        // Initialize Visualizer Bars
+        const BARS_COUNT = 30;
+        const bars = [];
+        for (let i = 0; i < BARS_COUNT; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            visualizer.appendChild(bar);
+            bars.push(bar);
+        }
+
+        let recognition = null;
+        let audioContext = null;
+        let analyser = null;
+        let dataArray = null;
+        let animationId = null;
+
+        // Check for Web Speech API Support
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            showError("Web Speech API is not supported in this browser. Try Chrome or Edge.");
+            startBtn.disabled = true;
+        }
+
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.style.display = 'block';
+            setTimeout(() => { errorMsg.style.display = 'none'; }, 5000);
+        }
+
+        function updateStatus(text, isActive = false) {
+            statusBadge.textContent = text;
+            if (isActive) statusBadge.classList.add('active');
+            else statusBadge.classList.remove('active');
+        }
+
+        async function startVisualizer(stream) {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audioContext.createMediaStreamSource(stream);
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 64;
+                source.connect(analyser);
+
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+
+                function animate() {
+                    animationId = requestAnimationFrame(animate);
+                    analyser.getByteFrequencyData(dataArray);
+
+                    bars.forEach((bar, i) => {
+                        const index = Math.floor(i * (dataArray.length / BARS_COUNT));
+                        const val = dataArray[index] / 2;
+                        bar.style.height = `${Math.max(4, val)}px`;
+                        bar.style.opacity = 0.5 + (val / 100);
+                    });
+                }
+                animate();
+            } catch (e) {
+                console.error("Visualizer failed", e);
+            }
+        }
+
+        function stopVisualizer() {
+            if (animationId) cancelAnimationFrame(animationId);
+            if (audioContext) audioContext.close();
+            bars.forEach(bar => bar.style.height = '4px');
+        }
+
+        startBtn.onclick = async () => {
+            try {
+                // 1. Request Microphone for Visualizer (also validates permissions)
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                await startVisualizer(stream);
+
+                // 2. Setup Recognition
+                recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'en-US';
+
+                recognition.onstart = () => {
+                    updateStatus("Listening...", true);
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+                    document.getElementById('placeholder')?.remove();
+                };
+
+                recognition.onresult = (event) => {
+                    let interimTranscript = '';
+                    let finalTranscript = '';
+
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        if (event.results[i].isFinal) {
+                            finalTranscript += event.results[i][0].transcript;
+                        } else {
+                            interimTranscript += event.results[i][0].transcript;
+                        }
+                    }
+
+                    // Create or update result display
+                    const lastPara = output.lastElementChild;
+                    if (finalTranscript) {
+                        const span = document.createElement('span');
+                        span.className = 'final';
+                        span.textContent = finalTranscript + ' ';
+                        output.appendChild(span);
+                        output.scrollTop = output.scrollHeight;
+                    }
+
+                    // Handle interim
+                    let interimSpan = document.getElementById('interim-span');
+                    if (!interimSpan) {
+                        interimSpan = document.createElement('span');
+                        interimSpan.id = 'interim-span';
+                        interimSpan.className = 'interim';
+                        output.appendChild(interimSpan);
+                    }
+                    interimSpan.textContent = interimTranscript;
+                };
+
+                recognition.onerror = (event) => {
+                    console.error("Speech Error:", event.error);
+                    if (event.error === 'not-allowed') {
+                        showError("Microphone access denied.");
+                    } else if (event.error === 'network') {
+                        showError("Network error. Web Speech API requires internet.");
+                    } else if (event.error !== 'no-speech') {
+                        showError("Error: " + event.error);
+                    }
+                    stopRecognition();
+                };
+
+                recognition.onend = () => {
+                    if (statusBadge.textContent === "Listening...") {
+                        // If it stopped unexpectedly, restart if we still want to be active
+                        // But for this demo, we just stop.
+                        stopRecognition();
+                    }
+                };
+
+                recognition.start();
+
+            } catch (err) {
+                console.error("Init failed", err);
+                showError("Could not access microphone.");
+            }
+        };
+
+        function stopRecognition() {
+            if (recognition) {
+                recognition.stop();
+                recognition = null;
+            }
+            stopVisualizer();
+            updateStatus("Standby");
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+        }
+
+        stopBtn.onclick = stopRecognition;
+
+    </script>
+</body>
+</html>
